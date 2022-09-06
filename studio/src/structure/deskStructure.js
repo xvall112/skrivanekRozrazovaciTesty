@@ -1,10 +1,17 @@
 import S from "@sanity/desk-tool/structure-builder";
 import { MdSettings } from "react-icons/md";
-import { MdPerson, MdDescription, MdLocalOffer } from "react-icons/md";
+import {
+  MdPerson,
+  MdDescription,
+  MdLocalOffer,
+  MdQuestionAnswer,
+  MdAssignment,
+  MdViewList,
+} from "react-icons/md";
 import IframePreview from "../previews/IframePreview";
 
 // Web preview configuration
-const remoteURL = "https://sanity-gatsby-blog-web-jbj4xxdo.netlify.app";
+const remoteURL = "https://skrivanek-testy-sanity.netlify.app";
 const localURL = "http://localhost:8000";
 const previewURL =
   window.location.hostname === "localhost" ? localURL : remoteURL;
@@ -68,13 +75,34 @@ export default () =>
         .icon(MdLocalOffer)
         .schemaType("category")
         .child(S.documentTypeList("category").title("Categories")),
+      S.listItem()
+        .title("Answers")
+        .icon(MdQuestionAnswer)
+        .schemaType("answer")
+        .child(S.documentTypeList("answer").title("Answers")),
+      S.listItem()
+        .title("Exercises")
+        .icon(MdAssignment)
+        .schemaType("exercise")
+        .child(S.documentTypeList("exercise").title("Exercises")),
+      S.listItem()
+        .title("Tests")
+        .icon(MdViewList)
+        .schemaType("test")
+        .child(S.documentTypeList("test").title("Tests")),
       // `S.documentTypeListItems()` returns an array of all the document types
       // defined in schema.js. We filter out those that we have
       // defined the structure above.
       ...S.documentTypeListItems().filter(
         (listItem) =>
-          !["category", "author", "post", "siteSettings"].includes(
-            listItem.getId()
-          )
+          ![
+            "category",
+            "author",
+            "post",
+            "siteSettings",
+            "answer",
+            "test",
+            "exercise",
+          ].includes(listItem.getId())
       ),
     ]);
