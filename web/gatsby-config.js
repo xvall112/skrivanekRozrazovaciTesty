@@ -9,6 +9,8 @@ const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
   plugins: [
+    "gatsby-plugin-top-layout",
+    "gatsby-plugin-mui-emotion",
     "gatsby-plugin-postcss",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",

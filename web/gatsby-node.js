@@ -46,6 +46,42 @@ async function createBlogPostPages(graphql, actions) {
     });
 }
 
+async function createTestPages(graphql, actions) {
+  const { createPage } = actions;
+  const result = await graphql(`
+    {
+      allSanityTest(filter: { slug: { current: { ne: null } } }) {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+            name {
+              cs
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  if (result.errors) throw result.errors;
+
+  const testEdges = (result.data.allSanityTest || {}).edges || [];
+
+  testEdges.forEach((edge) => {
+    const { id, slug = {}, name } = edge.node;
+    const path = `/test/${slug.current}/`;
+    createPage({
+      path,
+      component: require.resolve("./src/templates/test.js"),
+      context: { id, name },
+    });
+  });
+}
+
 exports.createPages = async ({ graphql, actions }) => {
   await createBlogPostPages(graphql, actions);
+  await createTestPages(graphql, actions);
 };

@@ -6,11 +6,22 @@ import { Figure } from "./Figure";
 const components = {
   types: {
     /* eslint-disable-next-line react/display-name */
-    authorReference: ({ node }) => <span>{node?.author?.name}</span>,
+    authorReference: ({ value }) => (
+      <div style={{ padding: "10px" }}>{value?.author?.name}</div>
+    ),
+    answerReference: ({ value }) => (
+      <span>
+        <select name={value?.answer?.sanityId} id={value?.answer?.sanityId}>
+          <option value=""></option>
+          {value?.answer?.answerss?.map((answer, index) => {
+            return <option value={answer}>{answer}</option>;
+          })}
+        </select>
+      </span>
+    ),
     mainImage: Figure,
   },
 };
-
 
 const PortableText = ({ blocks }) => (
   <BasePortableText

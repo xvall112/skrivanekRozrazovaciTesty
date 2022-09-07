@@ -3,19 +3,19 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import { getGatsbyImageData } from "gatsby-source-sanity";
 import clientConfig from "../../client-config";
 
-export const Figure = ({ node }) => {
-  if (!node || !node.asset || !node.asset._id) {
+export const Figure = ({ value }) => {
+  if (!value || !value.asset || !value.asset._id) {
     return null;
   }
   const gatsbyImageData = getGatsbyImageData(
-    node,
+    value,
     { maxWidth: 675 },
     clientConfig.sanity
   );
   return (
     <figure>
-      <GatsbyImage image={gatsbyImageData} alt={node.alt} />
-      <figcaption>{node.caption}</figcaption>
+      <GatsbyImage image={gatsbyImageData} alt={value.alt} />
+      <figcaption>{value.caption}</figcaption>
     </figure>
   );
 };

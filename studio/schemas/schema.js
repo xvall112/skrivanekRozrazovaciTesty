@@ -20,8 +20,9 @@ import excerptPortableText from "./objects/excerptPortableText";
 import mainImage from "./objects/mainImage";
 import authorReference from "./objects/authorReference";
 import languageFields from "./objects/languageField";
+import answerReference from "./objects/answerReferenece";
+import answerReferenceLine from "./objects/answerReferenceLine";
 
-import { translateFields } from "./objects/fieldTranslation";
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
@@ -44,6 +45,8 @@ export default createSchema({
     answer,
     exercise,
     test,
+    answerReference,
+    answerReferenceLine,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
   ]),

@@ -11,6 +11,11 @@ export default {
       type: "translation",
     },
     {
+      title: "Box",
+      name: "box",
+      type: "translation",
+    },
+    {
       title: "Exercise",
       name: "exercise",
       type: "array",

@@ -4,6 +4,13 @@ export default {
   title: "Exercise",
   fields: [
     {
+      name: "myId",
+      type: "string",
+      title: "ID",
+      description:
+        "Jednoznačný identifikátor odpovědi (nezobrazuje se v testu)",
+    },
+    {
       title: "Question",
       name: "question",
       type: "translation",
@@ -15,21 +22,16 @@ export default {
       of: [
         {
           type: "block",
-          of: [
-            {
-              type: "reference",
-              title: "Answer",
-              to: [{ type: "answer" }],
-            },
-          ],
+          of: [{ type: "answerReference" }],
         },
-        { type: "reference", to: [{ type: "answer" }] },
+        { type: "answerReferenceLine" },
       ],
     },
   ],
   preview: {
     select: {
-      title: "question.cs",
+      title: "myId",
+      subtitle: "question.cs",
     },
   },
 };
